@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../static/SemanticUI/semantic.min.css">
+        <script
+                src="https://code.jquery.com/jquery-3.1.1.min.js"
+                integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+                crossorigin="anonymous"></script>
+        <script src="../static/SemanticUI/semantic.min.js"></script>
+        <style>
+        </style>
+    </head>
+    <body>
+        <div class="ui equal width center aligned padded stretched grid">
+            {% for x, elem in enumerate(movies) %}
+                {% if x % 3 == 0 %}
+                    {% if x != 0 %}
+                        </div>
+                    {% endif %}
+                    <div class="row">
+                {% endif %}
+                <div class="{{['','blue'][x%2]}} pointer column" onclick="movieInfo('/actors/{{elem.name}}')" style="cursor:pointer;">
+                    <div class="ui equal width grid">
+                        <div class="stretched row">
+                            <div class="six wide padded column">
+                                <img src="{{elem.img}}">
+                            </div>
+                            <div class="ten wide middle aligned paddded column">
+                                <h2>{{elem.name}}</h2>
+                                <p>{{elem.descr}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+        <script>
+            function movieInfo(value) {
+                window.location=value;
+            }
+        </script>
+    </body>
+</html>

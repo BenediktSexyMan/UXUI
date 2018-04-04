@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../static/SemanticUI/semantic.min.css">
+        <script
+                src="https://code.jquery.com/jquery-3.1.1.min.js"
+                integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+                crossorigin="anonymous"></script>
+        <script src="../static/SemanticUI/semantic.min.js"></script>
+        <style>
+        </style>
+    </head>
+    <body>
+        <div class="thirteen wide column">
+                    <h1 style="text-align:center;">Lead Actors</h1>
+                    <div class="ui equal width padded grid">
+                        {% for x, elem in enumerate(movie.characters) %}
+                            {% if x % 2 == 0 %}
+                                {% if x != 0 %}
+                                    </div>
+                                {% endif %}
+                                <div class="row">
+                            {% endif %}
+                            <div class="ui large modal actor{{x}}">
+                                <div class="scrolling content">
+                                    <div class="ui equal width padded center aligned grid">
+                                        <div class="row">
+                                            <img src="{{elem.actor.img}}">
+                                        </div>
+                                        <div class="row">
+                                            <p>{{elem.actor.descr}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+                                function actor{{x}}() {
+                                    $(".ui.large.modal.actor{{x}}").modal("show");
+                                }
+                            </script>
+                            <div class="{{ ['blue', 'red', 'red', 'blue'][x%4] }} column">
+                                <div class="ui equal width padded grid">
+                                    <div class="row">
+                                        <div class="column">
+                                            <img src="{{ elem.actor.img }}" onclick="actor{{ x }}();" style="cursor:pointer;">
+                                        </div>
+                                        <div class="column">
+                                            <h3>{{elem.name + " (" + elem.actor.name + ")"}}</h3>
+                                            <p>{{elem.descr}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        </div>
+                    </div>
+                </div>
+    </body>
+</html>
